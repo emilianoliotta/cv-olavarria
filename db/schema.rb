@@ -11,95 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141211113215) do
+ActiveRecord::Schema.define(version: 20150119055651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "answers", force: true do |t|
-    t.string   "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "question_id"
-  end
-
-  add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
-
-  create_table "bids", force: true do |t|
-    t.float    "value"
-    t.text     "need"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "product_id"
-    t.integer  "user_id"
-  end
-
-  add_index "bids", ["product_id"], name: "index_bids_on_product_id", using: :btree
-  add_index "bids", ["user_id"], name: "index_bids_on_user_id", using: :btree
-
-  create_table "categories", force: true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "products", force: true do |t|
     t.string   "title"
-    t.string   "imageURL"
     t.text     "description"
+    t.float    "price"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
-    t.integer  "category_id"
-    t.datetime "ends_at"
-    t.integer  "chosen_bid_id"
-    t.datetime "finished_at"
   end
-
-  add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
-  add_index "products", ["chosen_bid_id"], name: "index_products_on_chosen_bid_id", using: :btree
-  add_index "products", ["user_id"], name: "index_products_on_user_id", using: :btree
-
-  create_table "questions", force: true do |t|
-    t.string   "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "product_id"
-    t.integer  "user_id"
-  end
-
-  add_index "questions", ["product_id"], name: "index_questions_on_product_id", using: :btree
-  add_index "questions", ["user_id"], name: "index_questions_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "country"
-    t.string   "province"
-    t.string   "city"
-    t.string   "domicile"
-    t.string   "card_1"
-    t.string   "card_2"
-    t.string   "card_3"
-    t.string   "card_4"
-    t.string   "security_code"
-    t.string   "card_owner_first_name"
-    t.string   "card_owner_last_name"
-    t.date     "expires_on"
-    t.boolean  "admin",                  default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

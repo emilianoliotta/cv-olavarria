@@ -1,0 +1,67 @@
+<% devise_error_messages! %>
+
+<h2 class="subtitulos">Registrarse</h2>
+  <div class="container">
+
+    <div class="row" style="padding-top: 1em">
+    <div class="col-xs-3 col-md-3"></div>
+    <div class="col-xs-6 col-md-6">
+      <p>Por favor, complete los siguientes campos para poder así crearse una cuenta personal en "Compra y venta Olavarría".</p>
+      <p>Los campos marcados con <span class="campo-obligatorio">*</span> son obligatorios.</p>
+    </div>
+  </div>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <div class="row">
+        <div class="col-xs-3 col-md-3"></div>
+        <div class="col-xs-6 col-md-6"><%= f.label :email %><span class="campo-obligatorio">*</span></div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-3 col-md-3"></div>
+        <div class="col-xs-6 col-md-6"><%= f.email_field :email, :required => "required",  class:"form-control" %></div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-3 col-md-3"></div>
+        <div class="col-xs-6 col-md-6"><%= f.label :password %><span class="campo-obligatorio">*</span>
+          <% if @validatable %>
+            <span class="italica">(<%= @minimum_password_length %> caracteres como mínimo)</span>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-3 col-md-3"></div>
+        <div class="col-xs-6 col-md-6">
+          
+            <%= f.password_field :password, autocomplete: "off" , :required => "required", class:"form-control" %>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-3 col-md-3"></div>
+        <div class="col-xs-6 col-md-6"><%= f.label :password_confirmation %><span class="campo-obligatorio">*</span></div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-3 col-md-3"></div>
+        <div class="col-xs-6 col-md-6">
+            <%= f.password_field :password_confirmation, autocomplete: "off" , :required => "required", class:"form-control"  %>
+        </div>
+      </div>
+       
+
+      <div class="row" style="padding-top:1em">
+        <div class="col-xs-3 col-md-3"></div>
+        <div class="col-xs-6 col-md-6"><%= f.submit "Registrarse" , class:"btn btn-primary"%></div>
+      </div>
+
+    <% end %>
+
+  <div class="row" style="padding-top:1em;padding-bottom:2em">
+    <div class="col-xs-3 col-md-3"></div>
+    <div class="col-xs-6 col-md-6"><%= render "devise/shared/links" %></div>
+  </div>
+</div>
