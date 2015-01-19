@@ -5,12 +5,12 @@ default: &default
 
 development:
   <<: *default
-  database: desarrollo_db
+  database: desarrollo_db_cv
 
 test:
   <<: *default
-  database: prueba_db
+  database: prueba_db_cv
 
 production:
   <<: *default
-  database: produccion_db
+  database: produccion_db_cv
