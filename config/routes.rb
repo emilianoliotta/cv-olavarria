@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'contact/index'
+
   devise_for :users
   get 'welcome/index'
 
