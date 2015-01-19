@@ -1,4 +1,4 @@
-Rails.application.configure do
+Rails.application.configure do 
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -79,4 +79,11 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  config.assets.initialize_on_precompile = false
+
+  config.assets.precompile += %w(custom.css)
+
+  # Host por defecto utilizado para formar las URL que pueden ser especificadas en
+  # los emails enviados. Es importante porque se deben enviar URL absolutas.
+  config.action_mailer.default_url_options = { host: "cv-olavarria.herokuapp.com" } # Al usar url_for utilizar la opción 'only_path: false' para que agregue este host
 end
