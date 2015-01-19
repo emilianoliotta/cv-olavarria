@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
-  get 'wellcome/index'
+  get 'welcome/index'
 
-  get 'wellcome/edit'
+  get 'welcome/edit'
 
-  get 'wellcome/destroy'
+  get 'welcome/destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

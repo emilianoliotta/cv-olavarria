@@ -29,7 +29,7 @@
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
 
-          <li><p class="navbar-text text-ellipsis"><b><%= current_user.first_name %></b></p></li>
+          <li><p class="navbar-text text-ellipsis"><b><%= current_user.email %></b></p></li>
 
           <li role="presentation" class="dropdown">
             <a class="dropdown-toggle negrita" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
