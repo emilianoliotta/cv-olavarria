@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CvOlavarria</title>
+  <title>Compra y Venta. Olavarría</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<%= render 'layouts/header' %> 
+
+<div id="cuerpo">
+	<div class="container"><%= render partial: "layouts/flash_messages", locals: {flash: flash} %></div>
+	<%= yield %>
+</div>
+
+<footer>
+	<center><span class="negrita">
+		Desarrollado por  <a href="/" style="color: red">Lucas Marmouget y Emiliano Liotta</a>
+	</span></center>
+</footer>
 
 </body>
 </html>
