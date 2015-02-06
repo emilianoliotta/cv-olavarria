@@ -3,7 +3,7 @@
 */
 
 .sidebar-wrapper{
-	width: 230px;
+	width: 180px;
 	margin-left: -230px;
 	position: absolute;
 	/*
@@ -18,7 +18,7 @@
 	width: 100%;
 	overflow-x: hidden;
 	overflow-y: auto;
-	background-color: rgb(199, 202, 203);
+	background-color: Moccasin;
 	transition: all 0.4s ease 0s;
 	-webkit-transition: all 0.4s ease 0s;
 	-moz-transition: all 0.4s ease 0s;
@@ -30,7 +30,7 @@
 
 .sidebar > ul{
 	list-style-type: none;
-	background-color: #EBECE8;
+	background-color: PapayaWhip;
 	margin-bottom: 0px;
 	padding-left: 0px;
 }
@@ -38,6 +38,7 @@
 .sidebar-header{
 	padding: 8px 6px;
 	font-size: 110%;
+	font-weight: bold;
 }
 
 .sidebar-nav > li > a{
@@ -52,7 +53,7 @@
 .sidebar-nav > li.active,
 .sidebar-nav > li.active > a:hover,
 .sidebar-nav > li.active > a:focus{
-	background-color: #DEE2DE;
+	background-color: PeachPuff;
 	color: black;
 }
 

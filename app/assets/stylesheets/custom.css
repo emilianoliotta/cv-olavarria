@@ -12,7 +12,7 @@ header{
 }
 
 body{
-	background-color: #C1CDC1;
+	background-color: OldLace; /*#C1CDC1*/
 	padding-top: 5.5em;
 	min-height: 100%;
 	position: relative;
@@ -168,6 +168,19 @@ body > footer{
 	font-weight: bold;
 }
 
+.menu{
+	font-weight: bold;
+	background-color: DarkOrange;
+	border-top-right-radius: 1.5em;
+	border-bottom-right-radius: 0.7em;
+	border-bottom-left-radius: 0.7em;
+	border-top-left-radius: 0.7em;
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, 1);
+	margin-bottom: 0.2em;
+	margin-top: 0.2em;
+	margin-right: 0.4em;
+}
+
 .italica{
 	font-style: italic;
 }
@@ -215,9 +228,12 @@ body > footer{
 /* ===== ESTILOS RELACIONADOS CON EL HEADER =======
    ================================================ */
 
-#bestnid-title{
-	font-size: 4em;
-	margin-left: 3em;
+#cv-title{
+	color: black; 
+	text-shadow: 0px 1px 10px rgba(150, 150, 150, 1); 
+	font-size: 1.5em;
+	margin-left: 0.3em;
+	margin-right: 1em;
 }
 
 #bestnid-logo{
@@ -232,10 +248,11 @@ body > footer{
 	font-size: 120%;
 }
 
-#bestnid-slogan{
-	color: black;
-	font-size: 0.7em;
-	text-shadow:2px 2px 2px rgba(150, 150, 150, 1);
+#cv-slogan{
+	color: OrangeRed;
+	font-size: 0.9em;
+	text-shadow:1px 1px 1px rgba(150, 150, 150, 0.5);
+	margin-left: 6.5em;
 }
 
 .navbar-custom {
