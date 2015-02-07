@@ -21,8 +21,9 @@
     <div class="collapse navbar-collapse nav-pills" id="to-collapse">
       <ul class="nav navbar-nav">
 
-        <li id="bestnid-home"><a href="/" class="menu">Inicio</a></li>
-        <li><a href="/contact/index" class="menu"><b>Contacto</b></a></li> 
+        <li><a href="/" class="menu">Inicio</a></li>
+        <li><a href="/contact/index" class="menu">Contacto</a></li>
+        <li><%= link_to "Cargar producto", new_product_path, :id => "menu-product" %></li> 
 
       </ul>
 
@@ -37,7 +38,7 @@
           <li><p class="navbar-text text-ellipsis"><b><%= current_user.email %></b></p></li>
 
           <li role="presentation" class="dropdown">
-            <a class="dropdown-toggle negrita" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
               Mi cuenta<span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role="menu">

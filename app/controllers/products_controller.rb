@@ -21,11 +21,12 @@ class ProductsController < ApplicationController
     title = params[:product][:title]
     imgURL = params[:product][:imageURL]
     description = params[:product][:description]
+    price = params[:product][:price]
 
     fecha_creado = Time.now
 
     # A la variable anteriormente creada le asigno el nuevo producto
-    @product = Product.create(title: title, description: description, imageURL: imgURL, user: current_user, created_at: fecha_creado)
+    @product = Product.create(title: title, description: description, imageURL: imgURL, price: price, user: current_user, created_at: fecha_creado)
 
     if @product.errors.any?
       flash.now[:alert] = view_context.generate_html_error(@product)
