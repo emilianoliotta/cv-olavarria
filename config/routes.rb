@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :products
 
   get 'contact/index'
+  get 'contact/enviar'
+  get 'contact/oferta'
 
   devise_for :users
   get 'welcome/index'

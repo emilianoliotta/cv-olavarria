@@ -1,8 +1,9 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, only: [:new,:create,:update,:destroy]
+  before_action :authenticate_user!, only: [:new,:create,:update,:destroy,:index]
   before_action :product_context, only: [:show, :update]
 
   def index
+    @products = Product.where(user_id: current_user.id)
   end
 
   def show
