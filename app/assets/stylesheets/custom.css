@@ -62,6 +62,18 @@ body > footer{
 	width: 49%;
 }
 
+.estructura1{
+	display: inline-block;
+	vertical-align: middle;
+	width: 74%;
+}
+
+.estructura2{
+	display: inline-block;
+	vertical-align: top;
+	width: 24%;
+}
+
 .number-area{
 	width:10em;
 }
@@ -256,12 +268,12 @@ body > footer{
 	margin-right: 1em;
 }
 
-#bestnid-logo{
+#cv-logo{
 	height: 100%;
 	padding-bottom: 2px;
 }
 
-#bestnid-logo-text{
+#cv-logo-text{
 	display: inline-block;
 	vertical-align: middle;
 	padding-top: 10px;
@@ -299,23 +311,23 @@ body > footer{
 }
 
 @media (max-width: 1290px) {
-	#bestnid-home{
+	#cv-home{
 		display: none;
 	}
 }
 
 @media (max-width: 1210px) {
-	#bestnid-logo-text{
+	#cv-logo-text{
 		display: none;
 	}
 }
 
 @media (max-width: 1100px) {
-	#bestnid-home{
+	#cv-home{
 		display: block;
 	}
 
-	#bestnid-logo-text{
+	#cv-logo-text{
 		display: inline-block;
 	}
 

@@ -33,7 +33,7 @@ class ProductsController < ApplicationController
       flash.now[:alert] = view_context.generate_html_error(@product)
     else
       flash[:notice] = "Producto publicado."
-      redirect_to welcome_index_path
+      redirect_to products_path(@product)
     end
   end
 
@@ -86,7 +86,7 @@ class ProductsController < ApplicationController
     @product = current_user.products.find(params[:id])
     @product.destroy
     flash[:notice] = "Producto eliminado."
-    redirect_to welcome_index_path
+    redirect_to products_path
   end
 
   private
