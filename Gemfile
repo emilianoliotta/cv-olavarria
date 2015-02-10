@@ -53,3 +53,7 @@ end
 
 # Gema para seleccionar país al registrarse
 gem 'country_select', github: 'stefanpenner/country_select'
+
+#Gemas para twitter
+gem 'twitter', '~> 5.3.1'
+gem 'omniauth-twitter', '~> 1.0.1'

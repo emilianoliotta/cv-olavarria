@@ -32,7 +32,7 @@ class ProductsController < ApplicationController
     if @product.errors.any?
       flash.now[:alert] = view_context.generate_html_error(@product)
     else
-      flash[:notice] = "Producto publicado."
+      flash[:notice] = "Producto publicado. En caso de haber ofertas, recibirá un email."
       redirect_to products_path(@product)
     end
   end
