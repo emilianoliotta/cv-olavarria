@@ -54,3 +54,8 @@ end
 # Gema para seleccionar país al registrarse
 gem 'country_select', github: 'stefanpenner/country_select'
 
+#Analytics
+group :production do  
+  gem 'rack-google-analytics', :require => 'rack/google-analytics'  
+end  
+
