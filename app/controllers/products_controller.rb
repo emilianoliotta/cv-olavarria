@@ -7,6 +7,9 @@ class ProductsController < ApplicationController
   end
 
   def show
+    if !user_signed_in?
+      flash[:notice] = "Registrate para realizar ofertas y publicar productos."
+    end
   end
 
   def edit
