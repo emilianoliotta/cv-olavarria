@@ -30,4 +30,8 @@ class Product < ActiveRecord::Base
 		where("#{column} BETWEEN ? AND ?", td1, td2)
 	end
 
+	def to_param
+	  "#{id} #{title}".parameterize
+	end
+
 end
