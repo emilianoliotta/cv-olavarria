@@ -1,0 +1,208 @@
+<div class="container">
+	<h1 class="subtitulos"><%=@product.title%> ($<%=@product.price%>)</h1>
+	<div class="panel panel-personal">
+		<div class="panel-heading"> 
+			<h3 class="panel-title estructura1">Detalles del producto</h3>
+			<% if user_signed_in? %>
+				<% if current_user.id != @owner.id %>
+					<div style="text-align:right;" class="text-ellipsis estructura2">
+						<button type="button"  class="btn btn-success" data-toggle="modal" data-target="#myModal">Ofertar</button>
+						<!-- Modal -->
+						<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+						        <center><h4 class="modal-title negrita" id="myModalLabel">Mi oferta</h4></center>
+						      </div>
+						      <div class="modal-body" style="text-align: left">
+
+								<div role="tabpanel">
+
+								  <!-- Nav tabs -->
+								  <ul class="nav nav-tabs" role="tablist">
+								    <li role="presentation" class="active"><a href="#oferta" aria-controls="home" role="tab" data-toggle="tab"><span class="negrita">Ofertar</span></a></li>
+								  </ul>
+
+								  <!-- Tab panes -->
+								  <div class="tab-content">
+								    <div role="tabpanel" class="tab-pane active" id="home"></div>
+								    <div role="tabpanel" class="tab-pane" id="profile"></div>
+								  </div>
+
+								</div>
+
+							    <div id="myTabContent" class="tab-content">
+							      <div role="tabpanel" class="tab-pane fade in active" id="oferta" aria-labelledBy="home-tab">
+								    <%= form_tag '/contact/oferta/', :method => :get do %>
+
+										<div class="row" style="padding-top:1em">
+									    <div class="col-xs-3 col-md-3"></div>
+									    <div class="col-xs-6 col-md-6"><span class="campo-obligatorio">Realiza tu oferta o consulta al vendedor.</span><%= text_area_tag :bid, params[:bid], class:"form-control", :placeholder => "Oferta/Consulta" %></div>
+										</div>
+										<div class="row" style="padding-top:1em">
+								    	<div class="col-xs-3 col-md-3"></div>
+								    	<div class="col-xs-6 col-md-6">El dueño del producto recibirá su E-mail para <br> 
+								    	responder su consulta</div>
+								    	</div>
+
+										<%= hidden_field_tag(:email, current_user.email) %>
+										<%= hidden_field_tag(:owner_email , @owner.email) %>
+										<%= hidden_field_tag(:product , @product.title) %>
+										<%= hidden_field_tag(:price , @product.price) %>
+								    	<div class="row" style="padding-top:1em">
+								    	<div class="col-xs-3 col-md-3"></div>
+								    	<div class="col-xs-6 col-md-6"><%= submit_tag "Enviar", class:"btn btn-default" %></div>
+								    	</div>
+								    	
+									<% end %>											
+							      </div>
+							    </div>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+						<!-- End Modal -->
+					</div>
+				<% else %>
+					<div style="text-align:right;" class="text-ellipsis estructura2">
+						<%= link_to "Eliminar", @product, data: { confirm: "¿Estás seguro?" }, :method => :delete , class:"btn btn-danger btn-xs" %>
+					</div>
+				<% end %>								
+			<% else %>
+				<div style="text-align:right;" class="text-ellipsis estructura2">
+					<button type="button"  class="btn btn-success" data-toggle="modal" data-target="#myModal">Ofertar</button>
+					<!-- Modal -->
+					<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+					        <center><h4 class="modal-title negrita" id="myModalLabel">Mi oferta</h4></center>
+					      </div>
+					      <div class="modal-body" style="text-align: left">
+
+							<div role="tabpanel">
+
+							  <!-- Nav tabs -->
+							  <ul class="nav nav-tabs" role="tablist">
+							    <li role="presentation" class="active"><a href="#oferta" aria-controls="home" role="tab" data-toggle="tab"><span class="negrita">Ofertar</span></a></li>
+							  </ul>
+
+							  <!-- Tab panes -->
+							  <div class="tab-content">
+							    <div role="tabpanel" class="tab-pane active" id="home"></div>
+							    <div role="tabpanel" class="tab-pane" id="profile"></div>
+							  </div>
+
+							</div>
+
+						    <div id="myTabContent" class="tab-content">
+						      <div role="tabpanel" class="tab-pane fade in active" id="oferta" aria-labelledBy="home-tab">
+							    <h3>No puedes ofertar sin estar registrado</h3>
+							    <%= link_to "Inicia sesión", new_user_session_path, :class => "btn btn-success" %>
+							    <%= link_to "Registrate", new_user_registration_path, :class => "btn btn-info" %>											
+						      </div>
+						    </div>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					<!-- End Modal -->
+				</div>
+			<% end %>
+		</div>
+		<div class="panel-body">
+			<div><%= image_tag(@product.imageURL, alt: @product.title, class: "img-thumbnail centrar imagenes-completas") %></div>
+			<div class="espaciar">
+				<%= simple_format(@product.description, {}, sanitize: true) %>
+			</div>
+		</div>
+		
+		<div class="panel-footer">
+			<table class="table">
+				<tr>
+					<td colspan="2">
+						<span class="negrita">Fecha de publicación:</span>	<%= localize @product.created_at.in_time_zone('Buenos Aires'), format: :long %>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<span class="negrita">Precio:  $</span>	<%= @product.price %>
+					</td>
+				</tr>	
+				<% if user_signed_in? %>
+					<% if @owner.email == current_user.email %>
+						<tr>		
+							<td style="text-align:right;" class="text-ellipsis">
+								<%= link_to "Eliminar producto", @product, data: { confirm: "¿Estás seguro?" }, :method => :delete , class:"btn btn-danger" %>
+							</td>
+						</tr>
+					<% else %>
+						<tr>
+							<td style="text-align:right;" class="text-ellipsis">
+								<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Contacta al dueño</button>
+								<!-- Modal -->
+								<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								  <div class="modal-dialog">
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+								        <center><h4 class="modal-title negrita" id="myModalLabel">Mi oferta</h4></center>
+								      </div>
+								      <div class="modal-body" style="text-align: left">
+
+										<div role="tabpanel">
+
+										  <!-- Nav tabs -->
+										  <ul class="nav nav-tabs" role="tablist">
+										    <li role="presentation" class="active"><a href="#oferta" aria-controls="home" role="tab" data-toggle="tab"><span class="negrita">Ofertar</span></a></li>
+										  </ul>
+
+										  <!-- Tab panes -->
+										  <div class="tab-content">
+										    <div role="tabpanel" class="tab-pane active" id="home"></div>
+										    <div role="tabpanel" class="tab-pane" id="profile"></div>
+										  </div>
+
+										</div>
+
+									    <div id="myTabContent" class="tab-content">
+									      <div role="tabpanel" class="tab-pane fade in active" id="oferta" aria-labelledBy="home-tab">
+										    <%= form_tag '/contact/oferta/', :method => :get do %>
+
+												<div class="row" style="padding-top:1em">
+											    <div class="col-xs-3 col-md-3"></div>
+											    <div class="col-xs-6 col-md-6"><span class="campo-obligatorio">Realiza tu oferta o consulta al vendedor.</span><%= text_area_tag :bid, params[:bid], class:"form-control", :placeholder => "Oferta/Consulta" %></div>
+												</div>
+												<div class="row" style="padding-top:1em">
+										    	<div class="col-xs-3 col-md-3"></div>
+										    	<div class="col-xs-6 col-md-6">El dueño del producto recibirá su E-mail para <br> 
+										    	responder su consulta</div>
+										    	</div>
+
+												<%= hidden_field_tag(:email, current_user.email) %>
+												<%= hidden_field_tag(:owner_email , @owner.email) %>
+												<%= hidden_field_tag(:product , @product.title) %>
+												<%= hidden_field_tag(:price , @product.price) %>
+										    	<div class="row" style="padding-top:1em">
+										    	<div class="col-xs-3 col-md-3"></div>
+										    	<div class="col-xs-6 col-md-6"><%= submit_tag "Enviar", class:"btn btn-default" %></div>
+										    	</div>
+										    	
+											<% end %>											
+									      </div>
+									    </div>
+								      </div>
+								    </div>
+								  </div>
+								</div>
+								<!-- End Modal -->
+							</td>
+						</tr>
+					<% end %>
+				<% end %>
+			</table>
+		</div>
+	</div>
+</div>

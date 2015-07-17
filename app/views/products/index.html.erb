@@ -1,0 +1,54 @@
+<% if @products.count > 0 %>
+<h1 class="subtitulos">Mis productos</h1>
+<div class="container">
+
+	<% @products.each do |p| %>
+	<div class="row row-venta panel">
+		<div class="col-xs-2 col-img">
+			<div class="center-helper"></div>
+			<a href = <%= product_path(p) %>><%= image_tag(p.imageURL, alt: p.title, :class => "img-thumbnail imagenes img-sales", :style => "margin-top: 0.5em") %></a>
+		</div>
+
+		<div class="col-xs-5 col-principal">
+			<div class="row row-description">
+				<div class="col-xs-12">
+					<h3><%= link_to p.title, p %></h3>
+					<p><%= simple_format(p.description.truncate(150), {}, sanitize: true) %>
+						<% if p.description.length > 150 %>
+							<%= link_to "(ver más)", p %>
+						<% end %>
+					</p>
+				</div>
+			</div>
+			<div class="row row-description-btn">
+				<div class="col-xs-12">
+					<%= link_to "Ver todos los detalles", p, class: "btn btn-primary" %>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xs-5 col-principal">
+			<div class="row row-info">
+				<div class="col-xs-12">
+					<div class="text-ellipsis"><b>Fecha de publicación: </b><%= localize p.created_at.in_time_zone('Buenos Aires'), format: :long %></div>
+				</div>
+			</div>
+			<div class="row row-info">
+				<div class="col-xs-12">
+					<div><b>Precio: </b>$<%= p.price %></div>
+				</div>
+			</div>
+			<div class="row row-info-btn">
+				<div class="col-xs-12">
+					<%= link_to "Eliminar", p, data: { confirm: "¿Estás seguro?" }, :method => :delete , class: "btn btn-danger" %>
+				</div>
+			</div>
+		</div>
+	</div>
+	<% end %>
+</div>
+
+<% else %>
+	<br><br><br><br>
+	<h1 class="subtitulos">No tienes productos.</h1>
+<% end %>

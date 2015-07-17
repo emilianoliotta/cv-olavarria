@@ -1,0 +1,168 @@
+<h1 class="subtitulos"><%= params[:search].blank? ? ((params[:order].blank? and params[:sort_by].blank?) ? "Últimos productos" : "Productos") : "Resultados de la búsqueda" %></h1>
+
+<div class="wrapper">
+	<div class="sidebar-wrapper">
+		<div class="sidebar hidden-xs">
+			<div class="sidebar-header">Ordenar productos</div>
+			<ul class="sidebar-nav">
+				<li<%= params[:sort_by] == "title" ? ' class="active"'.html_safe : '' %>><%= link_to "Título", params.merge({sort_by: :title}) %></li>
+				<li<%= params[:sort_by] == "price" ? ' class="active"'.html_safe : '' %>><%= link_to "Precio", params.merge({sort_by: :price}) %></li>
+				<li<%= ((params[:sort_by] == "created_at") || (params[:sort_by].blank?)) ? ' class="active"'.html_safe : '' %>><%= link_to "Fecha", params.merge({sort_by: :created_at}) %></li>
+			</ul>
+
+			<div class="sidebar-header">Sentido del orden</div>
+			<ul class="sidebar-nav">
+				<li<%= (params[:order] == "asc") ? ' class="active"'.html_safe : '' %>>
+					<%= link_to (params[:sort_by] == "title" ? "A a Z" : "Menor"), params.merge({order: :asc}) %></li>
+				<li<%= (params[:order] == "desc" || params[:order].blank?) ? ' class="active"'.html_safe : '' %>>
+					<%= link_to (params[:sort_by] == "title" ? "Z a A" : "Mayor"), params.merge({order: :desc}) %></li>
+			</ul>
+		</div>
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<!-- Anuncio cvOlavarria mediano -->
+		<ins class="adsbygoogle"
+		     style="display:inline-block;width:300px;height:250px"
+		     data-ad-client="ca-pub-1904809561643993"
+		     data-ad-slot="2627053463"></ins>
+		<script>
+		(adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
+	</div>
+
+	<div class="container contenido">
+		<div>
+			<% if @products.count == 0 %>
+				<h4 class = "italica" style="padding-bottom: 20em"> No se encontraron productos. </h4>
+			<% end %>
+			<% @products.each do |p| %>
+				<div class="col-xs-6 col-md-4"> <!-- 3 columnas en Medium devices y 2 en Extra Small devices -->
+					<div class = "panel panel-personal">
+						<div class = "panel-heading">
+							<span class = "panel-title text-ellipsis estructura1"><%= link_to p.title, p %></span>
+							<% if user_signed_in? %>
+								<% if current_user.id != p.user_id %>
+									<div style="text-align:right;" class="text-ellipsis estructura2">
+										<button type="button"  class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">Ofertar</button>
+										<!-- Modal -->
+										<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+										  <div class="modal-dialog">
+										    <div class="modal-content">
+										      <div class="modal-header">
+										        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+										        <center><h4 class="modal-title negrita" id="myModalLabel">Mi oferta</h4></center>
+										      </div>
+										      <div class="modal-body" style="text-align: left">
+
+												<div role="tabpanel">
+
+												  <!-- Nav tabs -->
+												  <ul class="nav nav-tabs" role="tablist">
+												    <li role="presentation" class="active"><a href="#oferta" aria-controls="home" role="tab" data-toggle="tab"><span class="negrita">Ofertar</span></a></li>
+												  </ul>
+
+												  <!-- Tab panes -->
+												  <div class="tab-content">
+												    <div role="tabpanel" class="tab-pane active" id="home"></div>
+												    <div role="tabpanel" class="tab-pane" id="profile"></div>
+												  </div>
+
+												</div>
+
+											    <div id="myTabContent" class="tab-content">
+											      <div role="tabpanel" class="tab-pane fade in active" id="oferta" aria-labelledBy="home-tab">
+												    <%= form_tag '/contact/oferta/', :method => :get do %>
+
+														<div class="row" style="padding-top:1em">
+													    <div class="col-xs-3 col-md-3"></div>
+													    <div class="col-xs-6 col-md-6"><span class="campo-obligatorio">Realiza tu oferta o consulta al vendedor.</span><%= text_area_tag :bid, params[:bid], class:"form-control", :placeholder => "Oferta/Consulta" %></div>
+														</div>
+														<div class="row" style="padding-top:1em">
+												    	<div class="col-xs-3 col-md-3"></div>
+												    	<div class="col-xs-6 col-md-6">El dueño del producto recibirá su E-mail para <br> 
+												    	responder su consulta</div>
+												    	</div>
+
+														<%= hidden_field_tag(:email, current_user.email) %>
+														<% owner_email = User.find(p.user_id).email %>
+														<%= hidden_field_tag(:owner_email , owner_email) %>
+														<%= hidden_field_tag(:product , p.title) %>
+														<%= hidden_field_tag(:price , p.price) %>
+												    	<div class="row" style="padding-top:1em">
+												    	<div class="col-xs-3 col-md-3"></div>
+												    	<div class="col-xs-6 col-md-6"><%= submit_tag "Enviar", class:"btn btn-default" %></div>
+												    	</div>
+												    	
+													<% end %>											
+											      </div>
+											    </div>
+										      </div>
+										    </div>
+										  </div>
+										</div>
+										<!-- End Modal -->
+									</div>
+								<% else %>
+									<%= link_to "Eliminar", p, data: { confirm: "¿Estás seguro?" }, :method => :delete , class:"btn btn-danger btn-xs estructura2" %>
+								<% end %>								
+							<% else %>
+								<div style="text-align:right;" class="text-ellipsis estructura2">
+									<button type="button"  class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">Ofertar</button>
+									<!-- Modal -->
+									<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									  <div class="modal-dialog">
+									    <div class="modal-content">
+									      <div class="modal-header">
+									        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+									        <center><h4 class="modal-title negrita" id="myModalLabel">Mi oferta</h4></center>
+									      </div>
+									      <div class="modal-body" style="text-align: left">
+
+											<div role="tabpanel">
+
+											  <!-- Nav tabs -->
+											  <ul class="nav nav-tabs" role="tablist">
+											    <li role="presentation" class="active"><a href="#oferta" aria-controls="home" role="tab" data-toggle="tab"><span class="negrita">Ofertar</span></a></li>
+											  </ul>
+
+											  <!-- Tab panes -->
+											  <div class="tab-content">
+											    <div role="tabpanel" class="tab-pane active" id="home"></div>
+											    <div role="tabpanel" class="tab-pane" id="profile"></div>
+											  </div>
+
+											</div>
+
+										    <div id="myTabContent" class="tab-content">
+										      <div role="tabpanel" class="tab-pane fade in active" id="oferta" aria-labelledBy="home-tab">
+											    <h3>No puedes ofertar sin estar registrado</h3>
+											    <%= link_to "Inicia sesión", new_user_session_path, :class => "btn btn-success" %>
+											    <%= link_to "Registrate", new_user_registration_path, :class => "btn btn-info" %>											
+										      </div>
+										    </div>
+									      </div>
+									    </div>
+									  </div>
+									</div>
+									<!-- End Modal -->
+								</div>
+							<% end %>
+						</div>
+						<div class = "panel-body panel-producto">
+							<%= link_to image_tag(p.imageURL, class: "img-thumbnail imagenes", width: 150), p, class: "estructura" %>
+							<div class="estructura">
+								<p><%= p.description.truncate(100) %>
+									<% if p.description.length > 100 %>
+										<span> <%= link_to "(ver más)", p %></span>
+									<% end %>
+								</p>
+							</div>
+						</div>
+						<div class = "panel-footer text-ellipsis">
+							<span class="negrita">Precio:   $<%= p.price %></span>
+						</div>
+					</div>			
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
